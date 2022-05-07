@@ -1,0 +1,62 @@
+{
+  "name": "express-typescript-boilerplate",
+  "version": "1.0.0",
+  "description": "express-typescript-boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "nodemon --exec node ./dist/index.js",
+    "dev": "nodemon --exec 'ts-node -r tsconfig-paths/register' src/index.ts",
+    "clean": "rm -rf ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mandragora-hub/express-typescript-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mandragora-hub/express-typescript-boilerplate/issues"
+  },
+  "homepage": "https://github.com/mandragora-hub/express-typescript-boilerplate#readme",
+  "dependencies": {
+    "apicache": "^1.6.3",
+    "compression": "^1.7.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "hpp": "^0.2.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.19.2",
+    "sequelize-typescript": "^2.1.3",
+    "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "@types/apicache": "^1.6.1",
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.13",
+    "@types/hpp": "^0.2.2",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^17.0.35",
+    "@types/validator": "^13.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "concurrently": "^7.1.0",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "2.6.2",
+    "sequelize-cli": "^6.4.1",
+    "tsc-alias": "^1.6.7",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.6.4"
+  }
+}
