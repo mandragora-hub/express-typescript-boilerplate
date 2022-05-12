@@ -1,25 +1,25 @@
 {
-  "name": "express-typesript-boilerplate",
+  "name": "express-typescript-boilerplate",
   "version": "1.0.0",
-  "description": "express-typesript-boilerplate",
+  "description": "express-typescript-boilerplate",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "dev": "ts-node-dev -r tsconfig-paths/register src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mandragora-hub/express-typesript-boilerplate.git"
+    "url": "git+https://github.com/mandragora-hub/express-typescript-boilerplate.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mandragora-hub/express-typesript-boilerplate/issues"
+    "url": "https://github.com/mandragora-hub/express-typescript-boilerplate/issues"
   },
-  "homepage": "https://github.com/mandragora-hub/express-typesript-boilerplate#readme",
+  "homepage": "https://github.com/mandragora-hub/express-typescript-boilerplate#readme",
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.18.1"
@@ -38,6 +38,9 @@
     "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^2.0.16",
     "prettier": "2.6.2",
+    "ts-node-dev": "^1.1.8",
+    "tsc-alias": "^1.6.7",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.6.4"
   }
 }
