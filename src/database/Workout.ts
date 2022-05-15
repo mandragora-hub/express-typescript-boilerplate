@@ -1,3 +1,5 @@
+import { Workout } from 'src/commons/types'
+
 const DB = require('./db.json')
 // const { saveToDatabase } = require('./utils')
 
@@ -9,7 +11,7 @@ const getAllWorkouts = () => {
   }
 }
 
-const getOneWorkout = (workoutId: any) => {
+const getOneWorkout = (workoutId: string) => {
   const workout = DB.workouts.find((workout: { id: any }) => workout.id === workoutId)
   if (!workout) {
     throw new Error(`Can't find workout with the id '${workoutId}'`)
@@ -17,7 +19,7 @@ const getOneWorkout = (workoutId: any) => {
   return workout
 }
 
-const createNewWorkout = (newWorkout: any) => {
+const createNewWorkout = (newWorkout: Workout) => {
   const isAlreadyAdded = DB.workouts.findIndex((workout: { name: any }) => workout.name === newWorkout.name) > -1
   if (isAlreadyAdded) {
     throw new Error(`Workout with the name '${newWorkout.name}' already exists`)
@@ -27,7 +29,7 @@ const createNewWorkout = (newWorkout: any) => {
   return newWorkout
 }
 
-const updateOneWorkout = (workoutId: any, changes: { name: any }) => {
+const updateOneWorkout = (workoutId: string, changes: Workout) => {
   const isAlreadyAdded = DB.workouts.findIndex((workout: { name: any }) => workout.name === changes.name) > -1
   if (isAlreadyAdded) {
     throw new Error(`Workout with the name '${changes.name}' already exists`)
@@ -46,7 +48,7 @@ const updateOneWorkout = (workoutId: any, changes: { name: any }) => {
   return updatedWorkout
 }
 
-const deleteOneWorkout = (workoutId: any) => {
+const deleteOneWorkout = (workoutId: string) => {
   const indexForDeletion = DB.workouts.findIndex((workout: { id: any }) => workout.id === workoutId)
   if (indexForDeletion === -1) {
     throw new Error(`Can't find workout with the id '${workoutId}`)
@@ -55,7 +57,7 @@ const deleteOneWorkout = (workoutId: any) => {
   // saveToDatabase(DB)
 }
 
-module.exports = {
+export default {
   getAllWorkouts,
   createNewWorkout,
   getOneWorkout,

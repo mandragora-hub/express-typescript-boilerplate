@@ -1,17 +1,19 @@
+import { Workout as WorkoutType } from "src/commons/types"
+import Workout from '../database/Workout'
+
 const { v4: uuid } = require('uuid')
-const Workout = require('../database/Workout')
 
 const getAllWorkouts = () => {
   const allWorkouts = Workout.getAllWorkouts()
   return allWorkouts
 }
 
-const getOneWorkout = (workoutId: any) => {
+const getOneWorkout = (workoutId: string) => {
   const workout = Workout.getOneWorkout(workoutId)
   return workout
 }
 
-const createNewWorkout = (newWorkout: any) => {
+const createNewWorkout = (newWorkout: WorkoutType) => {
   const workoutToInsert = {
     ...newWorkout,
     id: uuid(),
@@ -22,12 +24,12 @@ const createNewWorkout = (newWorkout: any) => {
   return createdWorkout
 }
 
-const updateOneWorkout = (workoutId: number, changes: any) => {
+const updateOneWorkout = (workoutId: string, changes: WorkoutType) => {
   const updatedWorkout = Workout.updateOneWorkout(workoutId, changes)
   return updatedWorkout
 }
 
-const deleteOneWorkout = (workoutId: number) => {
+const deleteOneWorkout = (workoutId: string) => {
     Workout.deleteOneWorkout(workoutId)
 }
 
