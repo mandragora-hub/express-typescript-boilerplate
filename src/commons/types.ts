@@ -11,3 +11,8 @@ export interface Workout {
   exercises: Array<string>
   trainerTips: Array<string>
 }
+
+export interface Record {
+  workout: string  
+  record: string
+}
