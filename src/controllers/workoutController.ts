@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from 'express'
 import workoutService from 'src/services/workoutService'
-import { TypedRequestBody } from 'src/commons/types'
+import { TypedRequestBody, Workout } from 'src/commons/types'
 
 const getAllWorkouts = (req: Request, res: Response) => {
   const allWorkouts = workoutService.getAllWorkouts()
@@ -17,11 +17,7 @@ const getOneWorkout = (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const createNewWorkout = (
-  req: TypedRequestBody<{ name: any; mode: any; equipment: any; exercises: any; trainerTips: any }>,
-  res: Response,
-  next: NextFunction
-) => {
+const createNewWorkout = (req: TypedRequestBody<Workout>, res: Response, next: NextFunction) => {
   const { body } = req
   if (!body.name || !body.mode || !body.equipment || !body.exercises || !body.trainerTips) {
     return next(
@@ -45,14 +41,16 @@ const createNewWorkout = (
   }
 }
 
-const updateOneWorkout = (req: Request, res: Response) => {
-  //   const updatedWorkout = workoutService.updateOneWorkout()
-  res.send('Update an existing workout')
+const updateOneWorkout = (req: TypedRequestBody<Workout> & Request, res: Response) => {
+  const workoutId = String(req.params.workoutId)
+  const updatedWorkout = workoutService.updateOneWorkout(workoutId, req.body)
+  res.status(201).send({ status: 'OK', data: updatedWorkout })
 }
 
 const deleteOneWorkout = (req: Request, res: Response) => {
-  workoutService.deleteOneWorkout(1)
-  res.send('Delete an existing workout')
+  const workoutId = req.params.workoutId
+  workoutService.deleteOneWorkout(workoutId)
+  res.send({ status: 'OK' })
 }
 
 export default {
