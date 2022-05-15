@@ -1,7 +1,7 @@
 import { Workout as WorkoutType } from "src/commons/types"
 import Workout from '../database/Workout'
 
-const { v4: uuid } = require('uuid')
+import { v4 as uuid } from 'uuid'
 
 const getAllWorkouts = () => {
   const allWorkouts = Workout.getAllWorkouts()

@@ -1,6 +1,6 @@
 import { Workout } from 'src/commons/types'
-
 const DB = require('./db.json')
+
 // const { saveToDatabase } = require('./utils')
 
 const getAllWorkouts = () => {
