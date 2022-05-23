@@ -1,36 +1,36 @@
-import { Workout as WorkoutType } from "src/commons/types"
-import Workout from '../database/Workout'
+import { Workout } from 'src/database/models/Workout'
+import sequelize from 'src/database'
 
-import { v4 as uuid } from 'uuid'
-
-const getAllWorkouts = () => {
-  const allWorkouts = Workout.getAllWorkouts()
+const getAllWorkouts = async () => {
+  const allWorkouts = await sequelize.models.Workout.findAll()
   return allWorkouts
 }
 
-const getOneWorkout = (workoutId: string) => {
-  const workout = Workout.getOneWorkout(workoutId)
+const getOneWorkout = (workoutId: number) => {
+  const workout = sequelize.models.Workout.findByPk(workoutId)
   return workout
 }
 
-const createNewWorkout = (newWorkout: WorkoutType) => {
-  const workoutToInsert = {
-    ...newWorkout,
-    id: uuid(),
-    createdAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
-    updatedAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
-  }
-  const createdWorkout = Workout.createNewWorkout(workoutToInsert)
-  return createdWorkout
+const createNewWorkout = async (newWorkout: Workout) => {  
+  const workout =  await sequelize.models.Workout.create({ ...newWorkout })
+  return workout
 }
 
-const updateOneWorkout = (workoutId: string, changes: WorkoutType) => {
-  const updatedWorkout = Workout.updateOneWorkout(workoutId, changes)
+const updateOneWorkout = async (workoutId: number, changes: Workout) => {
+  const updatedWorkout = sequelize.models.Workout.update(changes, { 
+    where: { 
+      id: workoutId
+    }
+  })
   return updatedWorkout
 }
 
-const deleteOneWorkout = (workoutId: string) => {
-    Workout.deleteOneWorkout(workoutId)
+const deleteOneWorkout = (workoutId: number) => {
+  sequelize.models.Workout.destroy({
+    where: {
+      id: workoutId
+    }
+  })
 }
 
 export default {
