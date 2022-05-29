@@ -1,8 +1,7 @@
 import { Table, Column, Model, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Workout } from './Workout'
-
+import Workout from './Workout'
 @Table
-export class Exercise extends Model {
+export default class Exercise extends Model {
   @Column
   name!: string
 

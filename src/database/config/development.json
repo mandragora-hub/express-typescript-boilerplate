@@ -1,0 +1,7 @@
+{
+    "username": "root",
+    "password": "",
+    "database": "express-typescript-boilerplate-database-dev",
+    "dialect": "sqlite",
+    "storage": ":memory:"
+}

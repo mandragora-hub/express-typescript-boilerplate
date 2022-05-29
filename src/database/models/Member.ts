@@ -3,7 +3,7 @@ import { Table, Column, Model, IsEmail } from 'sequelize-typescript'
 type Gender = "male" | "female"
 
 @Table
-export class Member extends Model {
+export default class Member extends Model {
   @Column
   name!: string
 

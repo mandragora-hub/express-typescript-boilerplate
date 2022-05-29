@@ -1,24 +1,25 @@
 import { Response, Request, NextFunction } from 'express'
-import workoutService from 'src/services/workoutService'
-import { Workout } from 'src/database/models/Workout'
+import { workoutService } from 'src/services'
+import Workout from 'src/database/models/Workout'
 
-const getAllWorkouts = (req: Request, res: Response) => {
-  const allWorkouts = workoutService.getAllWorkouts()
+const getAllWorkouts = async (req: Request, res: Response) => {
+  const allWorkouts = await workoutService.getAllWorkouts()
   res.send({ status: 'OK', data: allWorkouts })
 }
 
-const getOneWorkout = (req: Request<{ workoutId: number }>, res: Response, next: NextFunction) => {
+const getOneWorkout = async (req: Request<{ workoutId: number }>, res: Response, next: NextFunction) => {
   const workoutId = req.params.workoutId
   try {
-    const workout = workoutService.getOneWorkout(workoutId)
+    const workout = await workoutService.getOneWorkout(workoutId)
     res.send({ status: 'OK', data: workout })
   } catch (error) {
     next(error)
   }
 }
 
-const createNewWorkout = (req: Request<{ workoutId: number }, {}, Workout, {}>, res: Response, next: NextFunction) => {
+const createNewWorkout = async (req: Request<{ workoutId: number }, {}, Workout, {}>, res: Response, next: NextFunction) => {
   const { body } = req
+  // TODO put some validation
   // if (!body.name || !body.mode || !body.equipment || !body.exercises || !body.trainerTips) {
   //   return next(
   //     Error(
@@ -28,7 +29,7 @@ const createNewWorkout = (req: Request<{ workoutId: number }, {}, Workout, {}>, 
   // }
   const newWorkout = body
   try {
-    const createdWorkout = workoutService.createNewWorkout(newWorkout)
+    const createdWorkout = await workoutService.createNewWorkout(newWorkout)
     res.status(201).send({ status: 'OK', data: createdWorkout })
   } catch (error) {
     next(error)
