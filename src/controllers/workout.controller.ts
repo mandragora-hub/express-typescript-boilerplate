@@ -17,7 +17,11 @@ const getOneWorkout = async (req: Request<{ workoutId: number }>, res: Response,
   }
 }
 
-const createNewWorkout = async (req: Request<{ workoutId: number }, {}, Workout, {}>, res: Response, next: NextFunction) => {
+const createNewWorkout = async (
+  req: Request<{ workoutId: number }, {}, Workout, {}>,
+  res: Response,
+  next: NextFunction
+) => {
   const { body } = req
   // TODO put some validation
   // if (!body.name || !body.mode || !body.equipment || !body.exercises || !body.trainerTips) {
@@ -36,15 +40,23 @@ const createNewWorkout = async (req: Request<{ workoutId: number }, {}, Workout,
   }
 }
 
-const updateOneWorkout = (req: Request<{ workoutId: number }, {}, Workout, {}>, res: Response) => {
+const updateOneWorkout = async (
+  req: Request<{ workoutId: number }, {}, Workout, {}>,
+  res: Response,
+  next: NextFunction
+) => {
   const workoutId = req.params.workoutId
-  const updatedWorkout = workoutService.updateOneWorkout(workoutId, req.body)
-  res.status(201).send({ status: 'OK', data: updatedWorkout })
+  try {
+    const updatedWorkout = await workoutService.updateOneWorkout(workoutId, req.body)
+    res.status(201).send({ status: 'OK', data: updatedWorkout })
+  } catch (err) {
+    next(err)
+  }
 }
 
-const deleteOneWorkout = (req: Request<{ workoutId: number }>, res: Response) => {
+const deleteOneWorkout = async (req: Request<{ workoutId: number }>, res: Response) => {
   const workoutId = req.params.workoutId
-  workoutService.deleteOneWorkout(workoutId)
+  await workoutService.deleteOneWorkout(workoutId)
   res.send({ status: 'OK' })
 }
 
