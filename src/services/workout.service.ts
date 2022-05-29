@@ -10,8 +10,8 @@ const getAllWorkouts = async () => {
   return allWorkouts
 }
 
-const getOneWorkout = (workoutId: number) => {
-  const workout = sequelize.models.Workout.findByPk(workoutId)
+const getOneWorkout = async (workoutId: number) => {
+  const workout = await sequelize.models.Workout.findByPk(workoutId)
   return workout
 }
 
@@ -26,7 +26,7 @@ const createNewWorkout = async (newWorkout: Workout) => {
 }
 
 const updateOneWorkout = async (workoutId: number, changes: Workout) => {
-  const updatedWorkout = sequelize.models.Workout.update(changes, {
+  const updatedWorkout = await sequelize.models.Workout.update(changes, {
     where: {
       id: workoutId,
     },
@@ -34,8 +34,8 @@ const updateOneWorkout = async (workoutId: number, changes: Workout) => {
   return updatedWorkout
 }
 
-const deleteOneWorkout = (workoutId: number) => {
-  sequelize.models.Workout.destroy({
+const deleteOneWorkout = async (workoutId: number) => {
+  await sequelize.models.Workout.destroy({
     where: {
       id: workoutId,
     },
