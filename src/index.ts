@@ -9,7 +9,7 @@ import v1RouterMember from './v1/routes/memberRoutes'
 import sequelize from 'src/database'
 
 ;(async () => {
-  await sequelize.sync({ force: true })
+  await sequelize.sync({ alter: true })
 })()
 
 const app: Express = express()

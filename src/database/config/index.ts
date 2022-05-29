@@ -5,6 +5,7 @@ const development: SequelizeOptions = {
   password: '',
   database: 'express-typescript-boilerplate-database-dev',
   dialect: 'sqlite',
+  // storage: './database.sqlite',
   storage: ':memory:',
   dialectOptions: {
     bigNumberStrings: true,

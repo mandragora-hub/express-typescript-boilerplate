@@ -1,12 +1,13 @@
 import { Sequelize } from 'sequelize-typescript'
+import path from 'path'
 import config from './config'
-const env =  process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 
-type ConfigKey = keyof typeof config;
-const configEnvironment: ConfigKey = env;
+type ConfigKey = keyof typeof config
+const configEnvironment: ConfigKey = env
 
 const sequelize = new Sequelize(config[configEnvironment])
-sequelize.addModels([__dirname + '/models']);
+sequelize.addModels([path.resolve(__dirname, 'models')])
 
 // const sequelize = new Sequelize({
 //   database: 'some_db',
