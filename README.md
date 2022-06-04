@@ -7,7 +7,7 @@ express-typescript-boilerplate
 #### TODO:
 
 - Add support for health check
-- add sequelize migration
+- use sequelize-cli to create sequelize migration
 - add sequelize seed
 - add express session
 
