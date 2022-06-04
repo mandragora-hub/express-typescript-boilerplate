@@ -4,10 +4,13 @@ export {};
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-    //   DB_PORT: number;
-    //   DB_USER: string;
-      PORT: number;
-      NODE_ENV: 'development' | 'test' ;
+      HTTP_PORT: number;
+      NODE_ENV: 'development' | 'test';
+      
+      CI_DB_PASSWORD: string;
+      CI_DB_NAME: string;
+      CI_DB_USERNAME: string;
+      //   DB_PORT: number;
     }
   }
 }
