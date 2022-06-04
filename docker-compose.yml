@@ -10,15 +10,21 @@ services:
     build:
       context: .
       args:
-        HTTP_PORT: ${HTTP_PORT}
+        HTTP_EXPOSE_PORT: ${HTTP_PORT}
     container_name: express_app
+    environment:
+      HTTP_PORT: ${HTTP_PORT}
+      NODE_ENV: ${NODE_ENV} 
+      CI_DB_NAME: ${CI_DB_NAME}
+      CI_DB_HOST: ${CI_DB_HOST}
+      CI_DB_USERNAME: ${CI_DB_USERNAME}
+      CI_DB_PASSWORD: ${CI_DB_PASSWORD}    
     depends_on:
       - db
       # - redis
     restart: always
-    # ports:
-    #   - '${PORT}'
-    # working_dir: /app
+    ports:
+      - ${HTTP_PORT}
     networks:
       - express_network
 
@@ -33,8 +39,6 @@ services:
       MYSQL_USER: ${CI_DB_USERNAME}
       MYSQL_PASSWORD: ${CI_DB_PASSWORD}
     restart: always
-    # ports:
-    #   - '3307:3306'
     networks:
       - express_network
 
@@ -50,18 +54,18 @@ services:
   #   networks:
   #     - express_network
 
-  # adminer:
-  #   image: adminer
-  #   container_name: express_adminer
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     ADMINER_DESIGN: flat
-  #   ports:
-  #     - '8080:8080'
-  #   networks:
-  #     - express_network
+  adminer:
+    image: adminer
+    container_name: express_adminer
+    restart: always
+    depends_on:
+      - db
+    environment:
+      ADMINER_DESIGN: flat
+    ports:
+      - '7002:8080'
+    networks:
+      - express_network
 
 networks:
   express_network:
