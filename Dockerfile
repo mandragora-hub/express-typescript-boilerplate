@@ -18,8 +18,8 @@ COPY --from=ts-remover /usr/app ./
 
 ENV NODE_ENV="test"
 
-ARG HTTP_PORT
-EXPOSE $HTTP_PORT
+ARG HTTP_EXPOSE_PORT
+EXPOSE $HTTP_EXPOSE_PORT
 
 USER 1000
 CMD ["index.js"]
