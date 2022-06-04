@@ -1,23 +1,21 @@
 import express from 'express'
-import workoutController from 'src/controllers/workoutController'
-import recordController from 'src/controllers/recordController'
+import { workoutController, recordController } from 'src/controllers'
 import apicache from 'apicache'
 
-const cache = apicache.middleware;
+const cache = apicache.middleware
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/", cache('2 minutes'), workoutController.getAllWorkouts);
+router.get('/', workoutController.getAllWorkouts)
 
-router.get("/:workoutId", workoutController.getOneWorkout);
+router.get('/:workoutId', cache('2 minutes'), workoutController.getOneWorkout)
 
-router.get("/:workoutId/record", recordController.getRecordForWorkout);
+router.get('/:workoutId/record', recordController.getRecordForWorkout)
 
-router.post("/", workoutController.createNewWorkout);
+router.post('/', workoutController.createNewWorkout)
 
-router.patch("/:workoutId", workoutController.updateOneWorkout);
+router.patch('/:workoutId', workoutController.updateOneWorkout)
 
-router.delete("/:workoutId", workoutController.deleteOneWorkout);
-
+router.delete('/:workoutId', workoutController.deleteOneWorkout)
 
 export default router
